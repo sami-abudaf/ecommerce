@@ -44,14 +44,15 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <table
-                                            class="table display nowrap table-striped table-bordered ">
+                                            class="table display nowrap  table-bordered dataex-html5-export table-responsive">
                                             <thead>
                                             <tr>
                                                 <th> الاسم</th>
                                                 <th>الاختصار</th>
                                                 <th>اتجاه</th>
                                                 <th>الحالة</th>
-                                                <th>الإجراءات</th>
+                                                <th>التعديل </th>
+                                                <th>الحذف</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -67,14 +68,14 @@
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
                                                                 <a href="{{route('admin.languages.edit',$language -> id)}}"
-                                                                   class="btn btn-outline-primary btn-sm round box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                   class="btn btn-outline-primary btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">تعديل</a>
                                                             </div>
                                                         </td>
                                                         <td>
                                                         <div class="btn-group" role="group"
                                                              aria-label="Basic example">
                                                                 <a href="{{route('admin.languages.delete',$language -> id)}}"
-                                                                   class="btn btn-outline-danger btn-sm round box-shadow-3 mr-1 mb-1">حذف</a>
+                                                                   class="btn btn-outline-danger btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">حذف</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -83,6 +84,16 @@
 
 
                                             </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th> الاسم</th>
+                                                <th>الاختصار</th>
+                                                <th>اتجاه</th>
+                                                <th>الحالة</th>
+                                                <th>التعديل </th>
+                                                <th>الحذف</th>
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                         <div class="justify-content-center d-flex">
 

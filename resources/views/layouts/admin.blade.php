@@ -21,6 +21,13 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/plugins/animate/animate.css')}}">
     <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/vendors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/extensions/buttons.dataTables.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css')}}">
+    <!-- END VENDOR CSS-->
+
+    <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/vendors.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/weather-icons/climacons.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/fonts/meteocons/style.css')}}">
@@ -121,7 +128,31 @@
 
 <script src="{{asset('assets/admin/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
 
+
+
+<!-------------------------------->
+
+<!-- BEGIN PAGE VENDOR JS-->
+<script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/jszip.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/pdfmake.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/vfs_fonts.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/buttons.html5.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/buttons.print.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/tables/buttons.colVis.min.js')}}" type="text/javascript"></script>
+
+<script src="{{asset('app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-html5.js')}}"
+        type="text/javascript"></script>
+
+<script src="{{asset('app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-print.js')}}"
+        type="text/javascript"></script>
+
 <script>
+
     $('#meridians1').timeDropper({
         meridians: true,
         setCurrentTime: false

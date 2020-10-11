@@ -90,13 +90,13 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput2"> أختر القسم </label>
-                                                            <select name="category_id" class="select form-control">
+                                                            <select name="subcategory_id" class="select form-control">
                                                                 <optgroup label="من فضلك أختر القسم ">
                                                                     @if($categories && $categories -> count() > 0)
                                                                         @foreach($categories as $category)
                                                                             <option
                                                                                 value="{{$category -> id }}"
-                                                                                @if($vendor-> category_id == $category->id ) selected @endif
+                                                                                @if($vendor-> subcategory_id == $category->id ) selected @endif
                                                                             >{{$category -> name}}</option>
                                                                         @endforeach
                                                                     @endif

@@ -43,8 +43,7 @@
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal table-responsive">
+                                        <table class="table table-striped table-bordered dataex-html5-export table-responsive">
                                             <thead>
                                             <tr>
                                                 <th> القسم </th>
@@ -52,7 +51,9 @@
                                                 <th>الحالة</th>
                                                 <th>صوره القسم</th>
                                                 <th>القسم  الرئيسي </th>
-                                                <th>الإجراءات</th>
+                                                <th>التعديل </th>
+                                                <th>الحذف</th>
+                                                <th>التفعيل </th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -63,27 +64,27 @@
                                                         <td>{{$subcat -> name}}</td>
                                                         <td>{{get_default_lang()}}</td>
                                                         <td>{{$subcat -> getActive()}}</td>
-                                                        <td> <img class="img-fluid" style="width: 150px; height: 70px;" src="{{$subcat ->photo}}"></td>
+                                                        <td> <img class="img-fluid" style="width: 100px; height: 100px; border-radius: 50%;" src="{{$subcat ->photo}}"></td>
                                                         <td>{{$subcat->mainCategory->name}}</td>
                                                         <td>
 
                                                                 <a href="{{route('admin.subcategories.edit',$subcat->id)}}"
-                                                                   class="btn btn-sm btn-outline-primary round box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                   class="btn btn-sm btn-outline-primary btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">تعديل</a>
 
                                                         </td>
                                                         <td>
                                                                 <a href="{{route('admin.subcategories.delete',$subcat->id)}}"
-                                                                   class="btn btn-sm btn-outline-danger round box-shadow-3 mr-1 mb-1">حذف
+                                                                   class="btn btn-sm btn-outline-danger btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">حذف
 
                                                                 </a>
                                                         </td>
                                                         <td>
                                                                 <a href="{{route('admin.subcategories.status',$subcat->id)}}"
                                                                    @if($subcat -> active == 0)
-                                                                   class="btn btn-outline-success btn-sm round box-shadow-3 mr-1 mb-1">
+                                                                   class="btn btn-outline-success btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">
                                                                     تفعيل
                                                                     @else
-                                                                        class="btn btn-outline-warning  btn-sm round box-shadow-3 mr-1 mb-1">
+                                                                        class="btn btn-outline-warning  btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">
                                                                         الغاء تفعيل
                                                                     @endif
                                                                 </a>
@@ -97,6 +98,18 @@
 
 
                                             </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th> القسم </th>
+                                                <th> اللغة </th>
+                                                <th>الحالة</th>
+                                                <th>صوره القسم</th>
+                                                <th>القسم  الرئيسي </th>
+                                                <th>التعديل </th>
+                                                <th>الحذف</th>
+                                                <th>التفعيل </th>
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                         <div class="justify-content-center d-flex">
 

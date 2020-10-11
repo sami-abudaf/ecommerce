@@ -10,7 +10,7 @@ class Vendor extends Model
     use Notifiable;
     protected  $table ='vendors';
     protected $fillable = [
-        'latitude', 'longitude',  'name', 'logo', 'mobile','password' ,'address', 'email', 'category_id','active', 'created_at', 'updated_at'
+        'latitude', 'longitude',  'name', 'logo', 'mobile','password' ,'address', 'email', 'subcategory_id','active', 'created_at', 'updated_at'
     ];
 
     protected  $hidden= [' category_id','password'];
@@ -30,7 +30,7 @@ class Vendor extends Model
 
     }
     public  function  scopeSelection($query){
-        return $query->select('id', 'category_id','password','latitude','longitude', 'active', 'name','address', 'email', 'logo', 'mobile');
+        return $query->select('id', 'subcategory_id','password','latitude','longitude', 'active', 'name','address', 'email', 'logo', 'mobile');
     }
 
     public function  category(){
@@ -40,5 +40,11 @@ class Vendor extends Model
         if(!empty($password)){
             $this->attributes['password']= bcrypt(($password));
         }
+    }
+
+    public function  subcategory(){
+       return $this->belongsTo('App\Models\SubCategory','subcategory_id','id');
+
+
     }
 }

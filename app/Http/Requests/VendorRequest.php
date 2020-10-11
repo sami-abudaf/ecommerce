@@ -29,7 +29,8 @@ class VendorRequest extends FormRequest
                 'name' => 'required|string|max:100',
                 'mobile' =>'required|max:100|unique:vendors,mobile,'.$this -> id,
                 'email'  => 'required|email|unique:vendors,email,'.$this -> id,
-                'category_id'  => 'required|exists:main_categories,id',
+
+                'subcategory_id'  => 'required|exists:sub_categories,id',
                 'address'   => 'required|string|max:500',
                 'password'   => 'required_without:id|string|min:6'
             ];
@@ -41,7 +42,8 @@ class VendorRequest extends FormRequest
 
             'required'  => 'هذا الحقل مطلوب ',
             'max'  => 'هذا الحقل طويل',
-            'category_id.exists'  => 'القسم غير موجود ',
+
+            'subcategory_id.exists'  => 'القسم غير موجود ',
             'email.email' => 'ضيغه البريد الالكتروني غير صحيحه',
             'address.string' => 'العنوان لابد ان يكون حروف او حروف وارقام ',
             'name.string'  =>'الاسم لابد ان يكون حروف او حروف وارقام ',

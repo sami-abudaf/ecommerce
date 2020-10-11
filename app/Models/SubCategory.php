@@ -47,11 +47,18 @@ class SubCategory extends Model
     }
 
 
-    public function  vendors(){
+    /*public function  vendors(){
         return $this->hasMany('App\Models\Vendor','category_id','id');
-    }
+    }*/
     //get main category of subcategory
     public  function mainCategory(){
         return $this -> belongsTo(MainCategory::class,'category_id','id');
     }
+
+    public function vendors(){
+
+        return $this -> hasMany('App\Models\Vendor','subcategory_id','id');
+    }
+
+
 }

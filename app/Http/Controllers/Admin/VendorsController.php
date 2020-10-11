@@ -26,6 +26,7 @@ class VendorsController extends Controller
 
         // Vendor::select('id','category_id',' name', 'logo', 'mobile')->paginante(PAGINATION_COUNT);
         $vendors =  Vendor::selection()->paginate(PAGINATION_COUNT);
+        //return $vendors;
         return view('admin.vendors.index',compact('vendors'));
     }
 
@@ -36,8 +37,15 @@ class VendorsController extends Controller
      */
     public function create()
     {
+
+       // $treeView = MainCategory::where('translation_of', 0)->active()->get();
+
+        $subcategories = SubCategory::where('translation_of', 0)->active()->get();
         $categories = MainCategory::where('translation_of', 0)->active()->get();
-        return view('admin.vendors.create', compact('categories'));
+
+
+
+        return view('admin.vendors.create', compact('subcategories','categories'));
     }
 
     /**
@@ -69,7 +77,7 @@ class VendorsController extends Controller
                 'address'=> $request->address,
                 'logo' => $filePath,
                 'password'=> $request->password,
-                'category_id' => $request->category_id,
+                'subcategory_id' => $request->subcategory_id,
                  'latitude' => $request->latitude,
                  'longitude' => $request->longitude,
             ]);
@@ -116,7 +124,7 @@ class VendorsController extends Controller
             if(!$vendor)
                 return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود او ربما يكون محذوفا ']);
 
-            $categories =  MainCategory::where('translation_of',0)->active()->get();
+            $categories =  SubCategory::where('translation_of',0)->active()->get();
 
             return view('admin.vendors.edit', compact('vendor','categories'));
         }

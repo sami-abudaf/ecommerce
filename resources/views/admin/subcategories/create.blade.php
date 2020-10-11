@@ -47,12 +47,14 @@
                                               method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
-                                            <div class="form-group">
-                                                <label> صوره القسم </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="photo">
-                                                    <span class="file-custom"></span>
-                                                </label>
+                                            <div class="form-group col-4">
+
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="photo" class="custom-file-input" id="inputGroupFile01" required>
+                                                        <label class="custom-file-label" for="inputGroupFile01">صورة  القسم  </label>
+                                                    </div>
+                                                </fieldset>
                                                 @error('photo')
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -68,15 +70,16 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="projectinput2"> أختر القسم الرئيسي   </label>
-                                                                <select name="category_id" class="select form-control">
-                                                                    <optgroup label="من فضلك أختر القسم الفرعي  ">
+                                                                <select name="category_id" class="select form-control" required>
+
+                                                                        <option></option>
                                                                         @if($subcategories && $subcategories -> count() > 0)
                                                                             @foreach($subcategories as $subcategory)
                                                                                 <option
                                                                                     value="{{$subcategory -> id }}">{{$subcategory -> name}}</option>
                                                                             @endforeach
                                                                         @endif
-                                                                    </optgroup>
+
                                                                 </select>
                                                                 @error("category_id")
                                                                 <span class="text-danger"> {{$message}}</span>
@@ -93,7 +96,7 @@
                                                                     <input type="text" value="" id="name"
                                                                            class="form-control"
                                                                            placeholder="  "
-                                                                           name="category[{{$index}}][name]">
+                                                                           name="category[{{$index}}][name]" required>
                                                                     @error("category.$index.name")
                                                                     <span class="text-danger"> هذا الحقل مطلوب</span>
                                                                     @enderror
@@ -108,7 +111,7 @@
                                                                            class="form-control"
                                                                            placeholder="  "
                                                                            value="{{$lang -> abbr}}"
-                                                                           name="category[{{$index}}][abbr]">
+                                                                           name="category[{{$index}}][abbr]" required>
 
                                                                     @error("category.$index.abbr")
                                                                     <span class="text-danger"> هذا الحقل مطلوب</span>
