@@ -207,7 +207,7 @@
                                                         onclick="history.back();">
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary" id="type-success">
                                                     <i class="la la-check-square-o"></i> حفظ
                                                 </button>
                                             </div>

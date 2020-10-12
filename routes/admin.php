@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-define('PAGINATION_COUNT',15);
+define('PAGINATION_COUNT', 15);
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 

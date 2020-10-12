@@ -60,6 +60,9 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/style-rtl.css')}}">
     <!-- END Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/core/menu/menu-types/vertical-menu-modern.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/core/colors/palette-gradient.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css-rtl/pages/login-register.css')}}">
     @notify_css
     @yield('style')
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
@@ -69,7 +72,7 @@
         }
     </style>
 </head>
-<body class="vertical-layout vertical-menu 2-columns  @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
+<body class="vertical-layout vertical-menu 2-columns   @if(Request::is('admin/users/tickets/reply*')) chat-application @endif menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu" data-col="2-columns">
 <!-- fixed-top-->
 @include('admin.includes.header')
@@ -151,6 +154,14 @@
 <script src="{{asset('app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-print.js')}}"
         type="text/javascript"></script>
 
+<!-- BEGIN PAGE VENDOR JS-->
+<script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/js/forms/icheck/icheck.min.js')}}" type="text/javascript"></script>
+<!-- END PAGE VENDOR JS-->
+<!-- BEGIN PAGE LEVEL JS-->
+<script src="{{asset('app-assets/js/scripts/forms/form-login-register.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL JS-->
 <script>
 
     $('#meridians1').timeDropper({
