@@ -83,12 +83,17 @@ class VendorsController extends Controller
             ]);
             // send massege user
             Notification::send($vendor, new VendorCreated($vendor));
+            notify()->success(' لقد تم  الحفظ  بنجاح . ' );
 
-            return redirect()->route('admin.vendors')->with(['success' => 'تم الحفظ بنجاح']);
+            return redirect()->route('admin.vendors');
 
-        } catch (\Exception $ex) {
+        }
+
+        catch (\Exception $ex) {
+            notify()->error('لقد حصل خطاء ما  يرجي المحاولة فيما بعد .');
+
             return $ex;
-            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            return redirect()->route('admin.vendors');
         }
 
 
@@ -121,16 +126,22 @@ class VendorsController extends Controller
     {
         try {
             $vendor =  Vendor::Selection()->find($id);
-            if(!$vendor)
-                return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود او ربما يكون محذوفا ']);
+            if(!$vendor){
+                notify()->warning('هذا المتجر غير موجود او ربما يكون محذوفا !');
+                return redirect()->route('admin.vendors');
+            }
 
-            $categories =  SubCategory::where('translation_of',0)->active()->get();
+                else{
+                    $categories = MainCategory ::where('translation_of',0)->active()->get();
+                    $subcategories = SubCategory::where('translation_of', 0)->active()->get();
+                    return view('admin.vendors.edit', compact('vendor','categories','subcategories'));
+                }
 
-            return view('admin.vendors.edit', compact('vendor','categories'));
         }
         catch (\Exception $exception){
             return $exception;
-            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            notify()->error('لقد حصل خطاء ما  يرجي المحاولة فيما بعد .');
+            return redirect()->route('admin.vendors');
         }
     }
 
@@ -146,9 +157,9 @@ class VendorsController extends Controller
         //return $request;
 
         try {
-
             $vendor = Vendor::Selection()->find($id);
             if (!$vendor)
+
                 return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود او ربما يكون محذوفا ']);
 
 
@@ -161,8 +172,6 @@ class VendorsController extends Controller
                         'logo' => $filePath,
                     ]);
             }
-
-
             if (!$request->has('active'))
                 $request->request->add(['active' => 0]);
             else
@@ -182,11 +191,13 @@ class VendorsController extends Controller
                 );
 
             DB::commit();
-            return redirect()->route('admin.vendors')->with(['success' => 'تم التحديث بنجاح']);
+            notify()->success(' لقد تم  التعديل   بنجاح . ' );
+            return redirect()->route('admin.vendors');
         } catch (\Exception $exception) {
             return $exception;
             DB::rollback();
-            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            notify()->error('لقد حصل خطاء ما  يرجي المحاولة فيما بعد .');
+            return redirect()->route('admin.vendors');
         }
     }
 
@@ -206,6 +217,7 @@ class VendorsController extends Controller
             //$vendors = $maincategory->vendors();
 
             if (isset($vendors) && $vendors->count() > 0) {
+
                 return redirect()->route('admin.vendors')->with(['error' => 'لأ يمكن حذف هذا المنتج  ']);
             }
 
@@ -214,10 +226,13 @@ class VendorsController extends Controller
             unlink($image); //delete from folder*/
 
             $vendor->delete();
-            return redirect()->route('admin.vendors')->with(['success' => 'تم حذف المنتج بنجاح']);
+            notify()->warning('تم حذف المنتج بنجاح!');
+            return redirect()->route('admin.vendors');
 
         } catch (\Exception $ex) {
-            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+            notify()->error('لقد حصل خطاء ما  يرجي المحاولة فيما بعد .');
+            return redirect()->route('admin.vendors');
         }
     }
 
@@ -231,11 +246,12 @@ class VendorsController extends Controller
             $status =  $vendor -> active  == 0 ? 1 : 0;
 
             $vendor -> update(['active' =>$status ]);
-
-            return redirect()->route('admin.vendors')->with(['success' => ' تم تغيير الحالة بنجاح ']);
+            notify()->success('تم حالة المنتج بنجاح!');
+            return redirect()->route('admin.vendors');
 
         } catch (\Exception $ex) {
-            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            notify()->error('لقد حصل خطاء ما  يرجي المحاولة فيما بعد .');
+            return redirect()->route('admin.vendors');
         }
     }
 }

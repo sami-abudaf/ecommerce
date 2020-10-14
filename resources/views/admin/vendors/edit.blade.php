@@ -87,28 +87,39 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput2"> أختر القسم </label>
-                                                            <select name="subcategory_id" class="select form-control">
-                                                                <optgroup label="من فضلك أختر القسم ">
-                                                                    @if($categories && $categories -> count() > 0)
-                                                                        @foreach($categories as $category)
-                                                                            <option
-                                                                                value="{{$category -> id }}"
-                                                                                @if($vendor-> subcategory_id == $category->id ) selected @endif
-                                                                            >{{$category -> name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-                                                            @error("category_id")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="categoryList"> أختر القسم الرئيسي </label>
+                                                        <select id="categoryList" class="form-control selectBox bg-info white"   required>
+                                                            @if($categories && $categories -> count() > 0)
+                                                                @foreach ($categories as $category)
+                                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        @error("category_id")
+                                                        <span class="text-danger"> {{$message}}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="projectinput2"> أختر القسم الفرعي  </label>
+                                                        <select id="subcategoryList" class="form-control selectBox bg-success white" name="subcategory_id" required >
+                                                            @if($subcategories && $subcategories -> count() > 0)
+                                                                @foreach($subcategories as $category)
+                                                                    <option
+                                                                        value="{{$category -> id }}"
+                                                                        @if($vendor-> subcategory_id == $category->id ) selected @endif
+                                                                    >{{$category -> name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        @error("subcategory_id")
+                                                        <span class="text-danger"> {{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
-
 
                                                 <div class="row">
                                                     <div class="col-md-6 ">
@@ -222,6 +233,18 @@
 @endsection
 
 @section('script')
+    <script>
+
+        $('#categoryList').on('change', function () {
+            $("#subcategoryList").attr('disabled', false); //enable subcategory select
+            $("#subcategoryList").val("");
+            $(".subcategory").attr('disabled', true); //disable all category option
+            $(".subcategory").hide(); //hide all subcategory option
+            $(".parent-" + $(this).val()).attr('disabled', false); //enable subcategory of selected category/parent
+            $(".parent-" + $(this).val()).show();
+        });
+    </script>
+
 
     <script>
         $("#pac-input").focusin(function() {

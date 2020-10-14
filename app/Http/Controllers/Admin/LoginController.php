@@ -27,11 +27,15 @@ class LoginController extends Controller
         $remember_me = $request->has('remember_me') ? true : false;
 
         if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")], $remember_me)) {
-            // notify()->success('تم الدخول بنجاح  ');
+
+            notify()->success('تم الدخول بنجاح !  ');
+
             return redirect() -> route('admin.dashboard');
         }
-        // notify()->error('خطا في البيانات  برجاء المجاولة مجدا ');
-        return redirect()->back()->with(['error' => 'هناك خطا بالبيانات']);
+      notify()->error('هناك  خطأفي البيانات  الايميل او كلمة المرور .', 'Inconceivable!');
+       return redirect()->back();
+
+
 
     }
     public function save(){
