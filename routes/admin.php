@@ -13,7 +13,7 @@
 define('PAGINATION_COUNT', 100);
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
-
+    Route::get('logout','LoginController@logout') -> name('admin.logout');
 
 
 ######################### Begin Languages Route ########################

@@ -35,8 +35,19 @@ class LoginController extends Controller
       notify()->error('هناك  خطأفي البيانات  الايميل او كلمة المرور .', 'Inconceivable!');
        return redirect()->back();
 
+    }
+    public function logout()
+    {
 
+        $gaurd = $this->getGaurd();
+        $gaurd->logout();
 
+        return redirect()->route('admin.login');
+    }
+
+    private function getGaurd()
+    {
+        return auth('admin');
     }
     public function save(){
 
