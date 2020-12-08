@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ProfileRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 
-class LoginController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,64 +15,42 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-
-    public function getLogin(){
-
-        return view('admin.auth.login');
-    }
-
-    public function login(LoginRequest $request){
-
-       $remember_me = $request->has('remember_me') ? true : false;
-
-     if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")], $remember_me)) {
-
-            notify()->success('تم الدخول بنجاح !  ');
-             return redirect() -> route('admin.dashboard');
-
-        }
-      notify()->error('هناك  خطأفي البيانات  الايميل او كلمة المرور .', 'Inconceivable!');
-       return redirect()->back();
-        /***************************
-        $value = request()->input('identify'); // ahmed.emam.dev@gmail  or 293293923293
-        $field = filter_var($value, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
-        request()->merge([$field =>$value ]);
-        return redirect() -> route('admin.dashboard');
-*/
-
-
-
-        }
-
-
-
-    public function logout()
+    public function editProfile()
     {
 
-        $gaurd = $this->getGaurd();
-        $gaurd->logout();
+        $admin = Admin::find(auth('admin')->user()->id);
 
-        return redirect()->route('admin.login');
+        return view('admin.profile.edit', compact('admin'));
+
     }
 
-    private function getGaurd()
+    public function updateProfile(ProfileRequest $request)
     {
-        return auth('admin');
+        //validate
+        // db
+
+        try {
+
+            $admin = Admin::find(auth('admin')->user()->id);
+
+
+            if ($request->filled('password')) {
+                $request->merge(['password' => bcrypt($request->password)]);
+            }
+
+            unset($request['id']);
+            unset($request['password_confirmation']);
+
+            $admin->update($request->all());
+            notify()->success('تم تغير كلمة المرور بنجاح !  ');
+            return redirect()->back();
+
+        } catch (\Exception $ex) {
+            notify()->error('هناك  خطأفي البيانات  الايميل او كلمة المرور .', 'Inconceivable!');
+            //return redirect()->back()->with(['error' => 'هناك خطا ما يرجي المحاولة فيما بعد']);
+
+        }
     }
-
-
-    public function save(){
-
-        $admin = new App\Models\Admin();
-        $admin -> name ="Sami Abudaf";
-        $admin -> email ="sami@gmail.com";
-        $admin -> password = bcrypt("123456789");
-        $admin -> save();
-
-    }
-
-
     public function index()
     {
         //

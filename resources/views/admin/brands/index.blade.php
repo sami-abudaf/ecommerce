@@ -5,13 +5,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">الاقسام  الرئيسية  </h3>
+                    <h3 class="content-header-title">الماركات التجارية   </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> الاقسام  الرئيسية
+                                <li class="breadcrumb-item active">الماركة التجارية
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">جميع الاقسام  الرئيسية </h4>
+                                    <h4 class="card-title">جميع الماركات التجارية </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,10 +47,9 @@
                                             class="table table-striped table-bordered dataex-html5-export table-responsive">
                                             <thead>
                                             <tr>
-                                                <th> القسم </th>
-                                                <th> اللغة </th>
+                                                <th> اسم الماركة </th>
                                                 <th>الحالة</th>
-                                                <th>صوره القسم</th>
+                                                <th>صوره الماركة</th>
                                                 <th>التعديل </th>
                                                 <th>الحذف </th>
                                                 <th>التفعيل </th>
@@ -58,29 +57,29 @@
                                             </thead>
                                             <tbody>
 
-                                            @isset($categories)
-                                                @foreach($categories as $category)
+                                            @isset($brands)
+                                                @foreach($brands as $brand)
                                                     <tr>
-                                                        <td>{{$category -> name}}</td>
-                                                        <td>{{get_default_lang()}}</td>
-                                                        <td>{{$category -> getActive()}}</td>
-                                                        <td> <img class="img-fluid" style="width: 100px; height: 100px; border-radius: 50%;" src="{{$category ->photo}}"></td>
+                                                        <td>{{$brand->name}}</td>
+
+                                                        <td>{{$brand->getActive()}}</td>
+                                                        <td> <img class="img-fluid" style="width: 100px; height: 100px; border-radius: 50%;" src="{{$brand->photo}}"></td>
 
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route('admin.maincategories.edit',$category->id)}}"
+                                                                <a href="{{route('admin.brands.edit',$brand->id)}}"
                                                                    class="btn btn-outline-primary btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">تعديل</a>
 
                                                             </div>
                                                         </td>
                                                         <td>
-                                                                <a href="{{route('admin.maincategories.delete',$category->id)}}"
+                                                                <a href="{{route('admin.brands.delete',$brand->id)}}"
                                                                    class="btn btn-outline-danger btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">حذف</a>
                                                         </td>
                                                         <td>
-                                                                <a href="{{route('admin.maincategories.status',$category->id)}}"
-                                                                   @if($category -> active == 0)
+                                                                <a href="{{route('admin.brands.status',$brand->id)}}"
+                                                                   @if($brand -> active == 0)
                                                                    class="btn btn-outline-success  btn-sm btn-min-width round box-shadow-3 mr-1 mb-1">
 
                                                                     تفعيل
@@ -98,10 +97,9 @@
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th> القسم </th>
-                                                <th> اللغة </th>
+                                                <th> اسم الماركة </th>
                                                 <th>الحالة</th>
-                                                <th>صوره القسم</th>
+                                                <th>صوره الماركة</th>
                                                 <th>التعديل </th>
                                                 <th>الحذف </th>
                                                 <th>التفعيل </th>

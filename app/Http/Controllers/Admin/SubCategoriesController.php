@@ -25,7 +25,7 @@ class SubCategoriesController extends Controller
         $subcategory = SubCategory::where('translation_lang', $default_lang)
             ->selection()
             ->get();
-        return view('admin.subcategories.index',compact('subcategory',$default_lang));
+        return view('admin.subcategories.index',compact('subcategory'));
     }
 
     /**

@@ -13,9 +13,12 @@
 define('PAGINATION_COUNT', 100);
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+    Route::get('logout','LoginController@logout') -> name('admin.logout');
 
-
-
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('edit', 'ProfileController@editProfile')->name('edit.profile');
+        Route::put('update', 'ProfileController@updateprofile')->name('update.profile');
+    });
 ######################### Begin Languages Route ########################
 Route::group(['prefix' => 'languages'], function () {
     Route::get('/','LanguagesController@index') -> name('admin.languages');
@@ -65,6 +68,20 @@ Route::group(['prefix' => 'languages'], function () {
     });
     ######################### End  vendors Routes  ########################
 
+    ######################### Begin brands  Routes ########################
+    Route::group(['prefix' => 'brands'], function () {
+        Route::get('/','BrandsController@index') -> name('admin.brands');
+        Route::get('create','BrandsController@create') -> name('admin.brands.create');
+        Route::post('store','BrandsController@store') -> name('admin.brands.store');
+        Route::get('edit/{id}','BrandsController@edit') -> name('admin.brands.edit');
+        Route::post('update/{id}','BrandsController@update') -> name('admin.brands.update');
+        Route::get('delete/{id}','BrandsController@destroy') -> name('admin.brands.delete');
+
+        Route::get('changeStatus/{id}','BrandsController@changeStatus') -> name('admin.brands.status');
+
+
+    });
+    ######################### End  brands Routes  ########################
 });
 
 

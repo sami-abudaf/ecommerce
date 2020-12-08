@@ -24,16 +24,23 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
+            //'email' => 'required|email',
             'password' => 'required',
+
+            'identity.required' => 'Email or username cannot be empty',
+            'email.exists' => 'Email or username already registered',
+            'username.exists' => 'Username is already registered',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => 'البريد الإلكتروني مطلوب.',
-            'email.email' => 'ادخل عنوان بريد إلكتروني صالح.',
+            //'email.required' => 'البريد الإلكتروني مطلوب.',
+           // 'email.email' => 'ادخل عنوان بريد إلكتروني صالح.',
+            'identity' => 'required|string',
+            'email' => 'string|exists:users',
+            'username' => 'string|exists:users',
             'password.required' => 'كلمة المرور مطلوبة.'
         ];
     }
